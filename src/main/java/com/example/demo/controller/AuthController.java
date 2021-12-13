@@ -84,7 +84,7 @@ public class AuthController {
             ResponseEntity.ok(
                     Response.builder()
                             .timeStamp(LocalDateTime.now())
-                            .data(Map.of("User Details", authenticationRequest))
+                            .data(Map.of("user", authenticationRequest))
                             .message("Exception " + e.getMessage())
                             .status(HttpStatus.BAD_REQUEST)
                             .developerMessage("Api by Aregawi")
@@ -97,15 +97,18 @@ public class AuthController {
         Set<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toSet());
 
+        User user = userRepository.findByUsername(userDetails.getUsername()).get();
+
         AuthenticationResponse response = new AuthenticationResponse(jwt,
                 userDetails.getUsername(),
-                roles
+                roles,
+                user.getId()
         );
 
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
-                        .data(Map.of("User Details", response))
+                        .data(Map.of("user", response))
                         .message("User Logged in with successfully")
                         .status(OK)
                         .developerMessage("Api by Aregawi")
@@ -181,13 +184,14 @@ public class AuthController {
 
         AuthenticationResponse response = new AuthenticationResponse(jwt,
                 userDetails.getUsername(),
-                realRoles
+                realRoles,
+                user.getId()
         );
 
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
-                        .data(Map.of("User", response))
+                        .data(Map.of("user", response))
                         .message("User Successfully registered")
                         .status(OK)
                         .developerMessage("Api by Aregawi")

@@ -41,6 +41,6 @@ public class RegisterUserRequest {
     @Size(min = 4, max = 40)
     private String password;
 
-    private Integer points;
+    private Integer points=0;
 
 }

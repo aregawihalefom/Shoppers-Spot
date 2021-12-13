@@ -11,11 +11,13 @@ public class AuthenticationResponse {
     private String type = "Bearer";
     private String username;
     private Set<String> roles;
+    private Long id;
 
-    public AuthenticationResponse(String token, String username, Set<String> roles) {
+    public AuthenticationResponse(String token, String username, Set<String> roles, Long id) {
         this.token = token;
         this.username = username;
         this.roles = roles;
+        this.id = id;
     }
 
     public String getToken() {

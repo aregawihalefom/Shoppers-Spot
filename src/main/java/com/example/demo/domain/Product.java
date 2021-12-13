@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import com.example.demo.domain.enums.ProductStatusEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +26,9 @@ public class Product {
     private String sku;
     private Double price;
     private Integer quantity;
+    private String banner;
     private LocalDate createdAt;
+    private String productStatus = ProductStatusEnum.NEW.name();
 
     @ManyToMany(mappedBy = "products")
     private Set<Order> orders = new HashSet<>();
@@ -33,12 +37,14 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne
-    @JoinColumn(name = "product_status")
-    private ProductStatus status;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Set<ProductReview> productReview = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private User user;
 
 }

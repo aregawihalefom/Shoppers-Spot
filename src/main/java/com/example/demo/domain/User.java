@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,9 +40,24 @@ public class User {
     @JoinColumn(name = "user_id")
     private Set<Order> orders = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private Set<ProductReview> reviews = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Product> products = new HashSet<>();
 
+
+    public void addProduct(Product product){
+        this.products.add(product);
+    }
+
+    public void addReview(ProductReview review){
+        reviews.add(review);
+    }
+
+    public void addOrder(Order order){
+        orders.add(order);
+    }
 }

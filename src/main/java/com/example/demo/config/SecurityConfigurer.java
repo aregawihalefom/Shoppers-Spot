@@ -15,6 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Service
 @EnableWebSecurity
@@ -38,8 +41,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 //.antMatchers( "/admin/**").hasRole("ADMIN")
                 .antMatchers("/", "/h2-console/**").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/students").hasAuthority("ADMIN")
-                .antMatchers("/users").hasAuthority("ADMIN")
+                .antMatchers("/api/products/**").permitAll()
+                .antMatchers("/users/**").permitAll()
                 .antMatchers("/**/admin").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

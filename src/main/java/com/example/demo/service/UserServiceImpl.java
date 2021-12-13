@@ -29,21 +29,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getById(long id) {
-        return modelMapper.map(userRepository.findById(id).orElse(null),UserDto.class);
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
     @Override
-    public void addUser(UserDto user) {
-        userRepository.save(modelMapper.map(user,User.class));
+    public User findById(long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 
     @Override
     public void deleteById(long id) {
         userRepository.deleteById(id);
     }
-
 
 }
 
