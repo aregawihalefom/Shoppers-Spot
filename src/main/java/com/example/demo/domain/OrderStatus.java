@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.example.demo.service.order.OrderService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -17,5 +18,9 @@ public class OrderStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    public OrderStatus(String name){
+        this.name = name;
+    }
 
 }

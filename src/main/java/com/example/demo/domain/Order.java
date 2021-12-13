@@ -33,4 +33,9 @@ public class Order {
     @JoinColumn(name = "order_status_id")
     private OrderStatus orderStatus;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
 }

@@ -36,8 +36,7 @@ public class User {
     private Set<Role> roles = new HashSet<>();
     private Integer points;
 
-    @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "user_id")
+    @OneToMany(cascade = {CascadeType.ALL} , mappedBy = "user")
     private Set<Order> orders = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
