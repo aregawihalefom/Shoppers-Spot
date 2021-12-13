@@ -1,5 +1,6 @@
-package com.example.demo.service;
+package com.example.demo.service.user;
 
+import com.example.demo.domain.ProductReview;
 import com.example.demo.domain.User;
 import com.example.demo.dto.UserDto;
 import com.example.demo.helper.ListMapper;
@@ -46,6 +47,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User approveSeller(Long id, boolean approve) {
+        User user = userRepository.findById(id).get();
+        user.setEnabled(approve);
+        userRepository.save(user);
+        return user;
+    }
+
+    @Override
+    public List<ProductReview> findByUserId(Long id) {
+        return null;
     }
 
 }

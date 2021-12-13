@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -23,7 +20,15 @@ public class ProductReview {
     private String content;
     private LocalDate reviewedAt;
     private Double rating;
-    private boolean isApproved;
+    private boolean status;
     private LocalDate approvedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    public Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    public User user;
 
 }

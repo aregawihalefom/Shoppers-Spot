@@ -1,7 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.service.user;
 
 
 import com.example.demo.domain.Product;
+import com.example.demo.domain.ProductReview;
 import com.example.demo.domain.User;
 import com.example.demo.dto.UserDto;
 
@@ -18,4 +19,9 @@ public interface UserService {
     public User save(User user);
 
     public void deleteById(long id);
+
+    public User approveSeller(Long id, boolean b);
+
+    List<ProductReview> findByUserId(Long id);
+
 }

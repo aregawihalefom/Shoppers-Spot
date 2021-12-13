@@ -40,8 +40,7 @@ public class User {
     @JoinColumn(name = "user_id")
     private Set<Order> orders = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<ProductReview> reviews = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

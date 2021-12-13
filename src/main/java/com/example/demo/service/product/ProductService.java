@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.product;
 
 
 
@@ -22,5 +22,7 @@ public interface ProductService {
     public List<Product> findProductByUsername(String username);
 
     public void deleteById(long id);
+
+    public Product findByIdFull(Long id);
 
 }

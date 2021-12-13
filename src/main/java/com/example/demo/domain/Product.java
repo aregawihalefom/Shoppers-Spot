@@ -38,13 +38,17 @@ public class Product {
     private Category category;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<ProductReview> productReview = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
+
+    public void addReview(ProductReview review){
+        productReview.add(review);
+    }
+
 
 }

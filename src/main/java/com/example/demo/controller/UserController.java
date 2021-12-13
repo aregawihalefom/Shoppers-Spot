@@ -1,11 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.ERole;
-import com.example.demo.domain.Product;
-import com.example.demo.domain.Role;
-import com.example.demo.domain.User;
+import com.example.demo.domain.*;
 import com.example.demo.dto.UserDto;
-import com.example.demo.service.UserService;
+import com.example.demo.service.product.ReviewService;
+import com.example.demo.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +11,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api/users")
@@ -24,6 +21,9 @@ public class UserController {
             Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     @Autowired
     UserService userService;
+
+    @Autowired
+    ReviewService reviewService;
 
     @GetMapping
     public List<UserDto> getAll(){
@@ -71,6 +71,16 @@ public class UserController {
         List<User> sellers =   users.stream()
                 .filter(user->user.getRoles().contains(sellerRole)).collect(Collectors.toList());
         return sellers;
+    }
+
+    @PutMapping("/sellers/{id}")
+    public User approveSeller(@PathVariable("id") Long id, @RequestParam("approve")Boolean approve){
+        return userService.approveSeller(id,approve);
+    }
+
+    @GetMapping("/{id}/reviews")
+    public List<ProductReview> findByUserId(@PathVariable("id")Long id) {
+        return reviewService.findByUserId(id);
     }
 
 }
