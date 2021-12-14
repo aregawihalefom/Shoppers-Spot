@@ -46,6 +46,10 @@ public class User {
     @JsonManagedReference
     private Set<Product> products = new HashSet<>();
 
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Set<Address> addresses= new HashSet<>();
+
 
     public void addProduct(Product product){
         this.products.add(product);
