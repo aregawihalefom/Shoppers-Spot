@@ -12,8 +12,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
-@CrossOrigin(origins = "*")
+@RequestMapping(value = "/api/products" )
+@CrossOrigin(origins = "*", methods={RequestMethod.DELETE,
+        RequestMethod.GET, RequestMethod.PUT,RequestMethod.POST, RequestMethod.OPTIONS
+})
+
 public class ProductController {
 
     @Autowired

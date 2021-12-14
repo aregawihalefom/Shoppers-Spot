@@ -14,5 +14,5 @@ public interface ReviewRepository extends CrudRepository<ProductReview, Long> {
 
     public List<ProductReview> findProductReviewByProductId(Long id);
 
-    public List<ProductReview> findByI(boolean b);
+    public List<ProductReview> findProductReviewByStatus(boolean b);
 }
