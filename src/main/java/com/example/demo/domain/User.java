@@ -51,8 +51,6 @@ public class User {
     private List<ProductReview> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
     private List<Product> products = new ArrayList<>();
 
     @OneToMany

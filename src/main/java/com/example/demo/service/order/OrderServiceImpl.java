@@ -40,10 +40,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order updateOrderStatus(Long id, String status) {
+    public Order updateOrderStatus(Long id, OrderStatus status) {
         Order order = orderRepository.findById(id).orElseThrow();
-        OrderStatus status1 = new OrderStatus(status);
-        order.setOrderStatus(status1);
+        order.setOrderStatus(status);
         orderRepository.save(order);
         return order;
     }

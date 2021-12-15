@@ -39,6 +39,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/h2-console/**").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/products/**").permitAll()
+                .antMatchers("/api/order-status/**").permitAll()
                 .antMatchers("/api/users/**").permitAll()
                 .antMatchers("/api/orders/**").permitAll()
                 .antMatchers("/**/admin").hasAuthority("ADMIN")

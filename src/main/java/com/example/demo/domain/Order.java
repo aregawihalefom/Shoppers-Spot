@@ -31,11 +31,11 @@ public class Order {
     private LocalDate statusUpdateAt; // could be any update . cancel , confirmation
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany()
     @JoinTable()
     private Set<Product> products = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "order_status_id")
     private OrderStatus orderStatus;
 
@@ -52,7 +52,7 @@ public class Order {
     @JoinColumn(name = "billing_address_id")
     public Address billingAddress;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_method_id")
     public CardPayment cardPayment;
 

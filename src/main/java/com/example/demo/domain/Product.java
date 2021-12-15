@@ -46,7 +46,6 @@ public class Product {
     private List<ProductReview> productReview = new ArrayList<>();
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "user_id")
     private User user;
 

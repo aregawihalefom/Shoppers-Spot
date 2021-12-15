@@ -47,8 +47,6 @@ public class UserController {
     public Product addProduct(@PathVariable("id")Long id , @RequestBody Product product){
         User user =  userService.findById(id);
 
-        LOGGER.warning("User name adding  " + user.getUsername());
-
         if(user !=null)
         {
             product.setCreatedAt(LocalDate.now());

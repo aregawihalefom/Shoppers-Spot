@@ -1,6 +1,7 @@
 package com.example.demo.service.order;
 
 import com.example.demo.domain.Order;
+import com.example.demo.domain.OrderStatus;
 import com.example.demo.domain.ProductReview;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface OrderService {
 
     public void deleteById(long id);
 
-    public Order updateOrderStatus(Long id, String status);
+    public Order updateOrderStatus(Long id, OrderStatus status);
 
     public List<Order> findByUserId(Long id);
 
