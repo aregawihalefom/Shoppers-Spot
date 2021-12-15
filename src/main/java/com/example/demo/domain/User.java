@@ -1,12 +1,16 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -37,22 +41,27 @@ public class User {
     private Integer points;
 
     @OneToMany(cascade = {CascadeType.ALL} , mappedBy = "user")
-    private Set<Order> orders = new HashSet<>();
+    @JsonManagedReference
+    @JsonIgnore
+    private List<Order> orders = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<ProductReview> reviews = new HashSet<>();
+    @JsonManagedReference
+    @JsonIgnore
+    private List<ProductReview> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<Product> products = new HashSet<>();
+    @JsonIgnore
+    private List<Product> products = new ArrayList<>();
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private Set<Address> addresses= new HashSet<>();
+    private List<Address> addresses= new ArrayList<>();
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private Set<CardPayment> cardPayments;
+    private List<CardPayment> cardPayments;
 
     public void addProduct(Product product){
         this.products.add(product);

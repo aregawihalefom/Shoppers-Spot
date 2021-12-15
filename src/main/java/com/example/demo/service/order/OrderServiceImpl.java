@@ -4,10 +4,12 @@ import com.example.demo.domain.Order;
 import com.example.demo.domain.OrderStatus;
 import com.example.demo.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class OrderServiceImpl implements OrderService {
 
 

@@ -22,11 +22,11 @@ public class UserServiceImpl implements UserService {
     ModelMapper modelMapper;
     @Autowired
 
-    ListMapper<User,UserDto> listMapperUserToDto;
+    ListMapper<User, UserDto> listMapperUserToDto;
 
     @Override
     public List<UserDto> getAll() {
-        return (List<UserDto>) listMapperUserToDto.mapList(userRepository.findAll(),new UserDto());
+        return (List<UserDto>) listMapperUserToDto.mapList(userRepository.findAll(), new UserDto());
     }
 
     @Override
@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(long id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).get();
     }
 
     @Override
