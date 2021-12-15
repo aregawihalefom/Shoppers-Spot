@@ -50,6 +50,9 @@ public class User {
     @JoinColumn(name = "user_id")
     private Set<Address> addresses= new HashSet<>();
 
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Set<CardPayment> cardPayments;
 
     public void addProduct(Product product){
         this.products.add(product);
