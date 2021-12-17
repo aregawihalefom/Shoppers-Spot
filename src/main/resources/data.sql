@@ -16,3 +16,10 @@ insert into order_status(name) value ('ORDER_CANCELLED');
 insert into order_status(name) value ('ORDER_SHIPPED');
 insert into order_status(name) value ('ORDER_DELIVERED');
 insert into order_status(name) value ('ORDER_RETURNED');
+
+insert into category(name) value ('ORDER_PLACED');
+insert into category(name) value ('ORDER_CONFIRMED');
+insert into category(name) value ('ORDER_CANCELLED');
+insert into category(name) value ('ORDER_SHIPPED');
+insert into category(name) value ('ORDER_DELIVERED');
+insert into category(name) value ('ORDER_RETURNED');

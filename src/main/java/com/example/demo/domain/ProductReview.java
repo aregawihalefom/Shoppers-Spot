@@ -27,13 +27,5 @@ public class ProductReview {
     private boolean status;
     private LocalDate approvedAt;
 
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "product_id")
-    public Product product;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    public User user;
 
 }

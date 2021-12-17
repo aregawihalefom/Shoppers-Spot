@@ -2,6 +2,7 @@ package com.example.demo.domain;
 
 import com.example.demo.service.order.OrderService;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderStatus {
@@ -20,20 +22,4 @@ public class OrderStatus {
     private Long id;
     private String name;
 
-    public OrderStatus(String name){
-        this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderStatus that = (OrderStatus) o;
-        return Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
 }

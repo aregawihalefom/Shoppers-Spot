@@ -40,17 +40,16 @@ public class User {
     private Set<Role> roles = new HashSet<>();
     private Integer points;
 
-    @OneToMany(cascade = {CascadeType.ALL} , mappedBy = "user")
-    @JsonManagedReference
-    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id")
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonManagedReference
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private List<ProductReview> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private List<Product> products = new ArrayList<>();
 
     @OneToMany

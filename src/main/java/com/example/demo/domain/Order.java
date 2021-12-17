@@ -30,7 +30,6 @@ public class Order {
     private LocalDate orderDate;
     private LocalDate statusUpdateAt; // could be any update . cancel , confirmation
 
-
     @ManyToMany()
     @JoinTable()
     private Set<Product> products = new HashSet<>();
@@ -38,11 +37,6 @@ public class Order {
     @OneToOne()
     @JoinColumn(name = "order_status_id")
     private OrderStatus orderStatus;
-
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id")

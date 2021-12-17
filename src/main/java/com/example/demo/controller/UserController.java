@@ -78,7 +78,7 @@ public class UserController {
 
     @GetMapping("/{id}/reviews")
     public List<ProductReview> findByUserId(@PathVariable("id")Long id) {
-        return reviewService.findByUserId(id);
+        return  userService.findById(id).getReviews();
     }
 
 }

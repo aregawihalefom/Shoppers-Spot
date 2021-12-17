@@ -10,9 +10,5 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends CrudRepository<ProductReview, Long> {
 
-    public List<ProductReview> findProductReviewByUserId(Long id);
-
-    public List<ProductReview> findProductReviewByProductId(Long id);
-
     public List<ProductReview> findProductReviewByStatus(boolean b);
 }

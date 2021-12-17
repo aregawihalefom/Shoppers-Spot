@@ -59,7 +59,7 @@ public class ProductController {
 
     @GetMapping("/{id}/reviews")
     public List<ProductReview> findProductReviewByProductId(@PathVariable("id")Long id){
-        return reviewService.findByProductId(id);
+        return productService.findByIdFull(id).getProductReview();
     }
 
     @PostMapping("/{id}/reviews")
@@ -70,8 +70,6 @@ public class ProductController {
         Product product = productService.findByIdFull(id);
         product.addReview(review);
 
-        for(ProductReview review1 : product.getProductReview())
-            review1.setProduct(product);
         productService.save(product);
 
         return review;

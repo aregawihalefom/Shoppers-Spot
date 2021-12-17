@@ -3,6 +3,7 @@ package com.example.demo.service.product;
 import com.example.demo.domain.ProductReview;
 import com.example.demo.domain.User;
 import com.example.demo.repository.ReviewRepository;
+import com.example.demo.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,11 @@ public class ReviewServiceImpl implements ReviewService{
     @Autowired
     public ReviewRepository  reviewRepository;
 
+    @Autowired
+     private UserService userService;
+
+    @Autowired
+    private ProductService productService;
 
     @Override
     public List<ProductReview> findAll() {
@@ -46,11 +52,11 @@ public class ReviewServiceImpl implements ReviewService{
 
     @Override
     public List<ProductReview> findByUserId(Long id) {
-        return reviewRepository.findProductReviewByUserId(id);
+        return userService.findById(id).getReviews();
     }
 
     @Override
     public List<ProductReview> findByProductId(Long id) {
-        return reviewRepository.findProductReviewByProductId(id);
+        return productService.findByIdFull(id).getProductReview();
     }
 }

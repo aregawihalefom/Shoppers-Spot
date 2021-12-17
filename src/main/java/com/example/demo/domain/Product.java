@@ -29,6 +29,15 @@ public class Product {
     private String sku;
     private Double price;
     private Integer quantity;
+
+    public List<ProductReview> getProductReview() {
+        return productReview;
+    }
+
+    public void setProductReview(List<ProductReview> productReview) {
+        this.productReview = productReview;
+    }
+
     private String banner;
     private LocalDate createdAt;
     private String productStatus = ProductStatusEnum.NEW.name();
@@ -41,8 +50,8 @@ public class Product {
     private Category category;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
     private List<ProductReview> productReview = new ArrayList<>();
 
     @ManyToOne

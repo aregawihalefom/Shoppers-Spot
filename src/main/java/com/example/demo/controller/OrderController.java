@@ -4,7 +4,6 @@ import com.example.demo.config.Constants;
 import com.example.demo.config.Utilities;
 import com.example.demo.domain.Order;
 import com.example.demo.domain.OrderStatus;
-import com.example.demo.domain.Product;
 import com.example.demo.domain.User;
 import com.example.demo.domain.enums.OrderStatusEnums;
 import com.example.demo.dto.CheckoutRecordDto;
@@ -15,11 +14,8 @@ import com.example.demo.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
-
 
 
 @RestController
@@ -44,13 +40,28 @@ public class OrderController {
     private OrderStatusService orderStatusService;
 
     @GetMapping
-    public List<Order> findAll(){
+    public List<Order> findAll() {
         return orderService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Order findById(@PathVariable("id")Long id){
+        return orderService.findById(id);
+    }
 
+    // active
     @GetMapping("/users/{id}")
-    public List<Order> findByUser(@PathVariable("id") Long userId){
+    public List<Order> findByUser(@PathVariable("id") Long userId) {
+        return orderService.findByUserId(userId);
+    }
+
+    @GetMapping("/users/{id}/cancelled")
+    public List<Order> findByUserCancelled(@PathVariable("id") Long userId) {
+        return orderService.findByUserId(userId);
+    }
+
+    @GetMapping("/seller/{id}/")
+    public List<Order> fidBySeller(@PathVariable("id") Long userId) {
         return orderService.findByUserId(userId);
     }
 
@@ -66,7 +77,7 @@ public class OrderController {
      */
 
     @PostMapping
-    public Order save(@RequestBody CheckoutRecordDto checkoutRecordDto){
+    public Order save(@RequestBody CheckoutRecordDto checkoutRecordDto) {
 
         // Get user
         User user = userService.findByUsername(checkoutRecordDto.getUsername());
@@ -85,22 +96,26 @@ public class OrderController {
         OrderStatus orderStatus = orderStatusService.findOrderStatusByName(OrderStatusEnums.ORDER_PLACED.name());
         newOrder.setOrderStatus(orderStatus);
         user.addOrder(newOrder);
-        for(Order order : user.getOrders()){
-            order.setUser(user);
-        }
         userService.save(user);
 
         return newOrder;
     }
 
     @PutMapping("/{id}/status")
-    public Order updateStatus(@RequestParam("status") String status, @PathVariable Long id){
-
-        OrderStatus orderStatus  = orderStatusService.findOrderStatusByName(status.toLowerCase().trim());
-        if(orderStatus !=null)
-            return  orderService.updateOrderStatus(id, orderStatus);
+    public Order updateStatus(@RequestParam("status") String status, @PathVariable Long id) {
+        OrderStatus orderStatus = orderStatusService.findOrderStatusByName(status.toLowerCase().trim());
+        if (orderStatus != null)
+            return orderService.updateOrderStatus(id, orderStatus);
         return null;
 
+    }
+
+    @DeleteMapping("/{id}")
+    public Order cancelOrder(@PathVariable("id")Long id){
+        OrderStatus orderStatus = orderStatusService.findOrderStatusByName(OrderStatusEnums.ORDER_CANCELLED.name());
+        Order order = orderService.findById(id);
+        order.setOrderStatus(orderStatus);
+        return orderService.save(order);
     }
 
 }
