@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.domain.Category;
 import com.example.demo.service.product.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

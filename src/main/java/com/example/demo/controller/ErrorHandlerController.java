@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -29,10 +30,10 @@ public class ErrorHandlerController  extends ResponseEntityExceptionHandler {
             fieldError.setMessage(error.getDefaultMessage());
             fieldErrors.add(fieldError);
         });
+
         ValidationResponse.setErrors(fieldErrors);
         return new ResponseEntity<>(ValidationResponse, status);
     }
-
 
 
 }

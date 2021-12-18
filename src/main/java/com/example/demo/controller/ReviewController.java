@@ -1,15 +1,24 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Product;
 import com.example.demo.domain.ProductReview;
+import com.example.demo.domain.User;
+import com.example.demo.service.product.ProductService;
 import com.example.demo.service.product.ReviewService;
+import com.example.demo.service.user.UserService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Logger;
 
-@RestController("/product/reviews")
-
+@RestController
+@RequestMapping("/api/reviews")
 @CrossOrigin(origins = "*")
 public class ReviewController {
 
@@ -18,6 +27,12 @@ public class ReviewController {
 
     @Autowired
     ReviewService reviewService;
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public List<ProductReview> getAll() {
@@ -30,8 +45,20 @@ public class ReviewController {
     }
 
     @PostMapping
-    public void save(@RequestBody ProductReview user) {
-        reviewService.save(user);
+    public ProductReview save(@RequestBody ProductReview review){
+        return reviewService.save(review);
+    }
+    @PutMapping("/{id}/{userId}")
+    public void save( @RequestBody ProductReview review, @PathVariable("id") Long id, @PathVariable("userId")Long userId) {
+
+        Product product = productService.findByIdFull(id);
+        review.setStatus(false);
+        review.setReviewedAt(LocalDate.now());
+        product.getProductReview().add(review);
+        productService.save(product);
+        User user = userService.findById(userId);
+        user.getReviews().add(review);
+        userService.save(user);
     }
 
     @DeleteMapping("/{id}")

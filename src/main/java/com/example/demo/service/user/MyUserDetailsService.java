@@ -1,6 +1,7 @@
 package com.example.demo.service.user;
 
 import com.example.demo.domain.User;
+import com.example.demo.dto.CustomExceptionDto;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +22,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(userName);
-        user.orElseThrow(() -> new UsernameNotFoundException("Not FOUND..."));
+        user.orElseThrow(() -> new CustomExceptionDto("Username/ Password combination incorrect"));
         return new MyUserDetails(user.get());
     }
 

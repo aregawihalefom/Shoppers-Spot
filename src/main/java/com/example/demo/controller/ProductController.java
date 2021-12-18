@@ -6,6 +6,7 @@ import com.example.demo.dto.ProductDto;
 import com.example.demo.service.product.ProductService;
 import com.example.demo.service.product.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -16,7 +17,6 @@ import java.util.List;
 @CrossOrigin(origins = "*", methods={RequestMethod.DELETE,
         RequestMethod.GET, RequestMethod.PUT,RequestMethod.POST, RequestMethod.OPTIONS
 })
-
 public class ProductController {
 
     @Autowired

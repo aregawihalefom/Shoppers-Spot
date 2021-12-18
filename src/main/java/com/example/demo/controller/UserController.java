@@ -5,6 +5,7 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.service.product.ReviewService;
 import com.example.demo.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -72,9 +73,15 @@ public class UserController {
     }
 
     @PutMapping("/sellers/{id}")
-    public User approveSeller(@PathVariable("id") Long id, @RequestParam("approve")Boolean approve){
-        return userService.approveSeller(id,approve);
+    public User approveSeller(@PathVariable("id") Long id){
+        return userService.approveSeller(id,true);
     }
+
+    @PutMapping("/sellers/dis/{id}")
+    public User diApproveSeller(@PathVariable("id") Long id){
+        return userService.approveSeller(id,false);
+    }
+
 
     @GetMapping("/{id}/reviews")
     public List<ProductReview> findByUserId(@PathVariable("id")Long id) {

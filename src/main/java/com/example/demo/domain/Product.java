@@ -1,10 +1,7 @@
 package com.example.demo.domain;
 
 import com.example.demo.domain.enums.ProductStatusEnum;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +14,7 @@ import java.util.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+@JsonIgnoreProperties("orders")
 public class Product {
 
     @Id
@@ -43,7 +40,7 @@ public class Product {
     private String productStatus = ProductStatusEnum.NEW.name();
 
     @ManyToMany(mappedBy = "products")
-    private Set<Order> orders = new HashSet<>();
+     private Set<Order> orders = new HashSet<>();
 
     @OneToOne
     @JoinColumn(name = "category_id")

@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -72,6 +73,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
+    @PreAuthorize("hasAnyRole('admin')")
     public ResponseEntity<Response> createAuthneticationToken(@Valid @RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         try {
             Authentication authentication = authenticationManager.authenticate(
