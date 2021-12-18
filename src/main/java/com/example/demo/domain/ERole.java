@@ -1,7 +1,7 @@
 package com.example.demo.domain;
 
 public enum ERole {
-    SELLER,
-    BUYER,
-    ADMIN
+    ROLE_SELLER,
+    ROLE_BUYER,
+    ROLE_ADMIN
 }

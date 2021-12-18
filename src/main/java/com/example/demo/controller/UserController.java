@@ -66,7 +66,7 @@ public class UserController {
 
         List<User> users = userService.findAll();
 
-        Role sellerRole = new Role(ERole.SELLER.name());
+        Role sellerRole = new Role(ERole.ROLE_SELLER.name());
         List<User> sellers =   users.stream()
                 .filter(user->user.getRoles().contains(sellerRole)).collect(Collectors.toList());
         return sellers;

@@ -5,6 +5,7 @@ import com.example.demo.config.Constants;
 import com.example.demo.domain.ERole;
 import com.example.demo.domain.Role;
 import com.example.demo.domain.User;
+import com.example.demo.dto.CustomExceptionDto;
 import com.example.demo.dto.Response;
 import com.example.demo.dto.authDTOs.AuthenticationRequest;
 import com.example.demo.dto.authDTOs.AuthenticationResponse;
@@ -73,7 +74,6 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    @PreAuthorize("hasAnyRole('admin')")
     public ResponseEntity<Response> createAuthneticationToken(@Valid @RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         try {
             Authentication authentication = authenticationManager.authenticate(
@@ -149,7 +149,7 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.BUYER.name())
+            Role userRole = roleRepository.findByName(ERole.ROLE_BUYER.name())
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
@@ -157,20 +157,20 @@ public class AuthController {
 
                 switch (role) {
                     case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ADMIN.name())
+                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN.name())
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
 
                         break;
                     case "seller":
-                        Role sellerRole = roleRepository.findByName(ERole.SELLER.name())
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        Role sellerRole = roleRepository.findByName(ERole.ROLE_SELLER.name())
+                                .orElseThrow(() -> new CustomExceptionDto("Error: Role is not found."));
                         roles.add(sellerRole);
 
                         break;
                     default:
-                        Role buyerRole = roleRepository.findByName(ERole.BUYER.name())
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        Role buyerRole = roleRepository.findByName(ERole.ROLE_BUYER.name())
+                                .orElseThrow(() -> new CustomExceptionDto("Error: Role is not found."));
                         roles.add(buyerRole);
                 }
             });

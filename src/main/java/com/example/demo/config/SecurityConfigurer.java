@@ -41,12 +41,12 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 //.antMatchers( "/admin/**").hasRole("ADMIN")
                 .antMatchers("/", "/h2-console/**").permitAll()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/reviews/**").hasAnyAuthority("admin","buyer")
-                .antMatchers("/api/products/**").hasAnyAuthority("seller", "buyer","admin")
-                .antMatchers("/api/order-status/**").hasAuthority("seller")
-                .antMatchers("/api/users/**").hasAuthority("admin")
-                .antMatchers("/api/orders/**").hasAnyAuthority("buyer", "seller")
-                .antMatchers("/**/admin").hasAuthority("ADMIN")
+                .antMatchers("/api/reviews/**").hasAnyAuthority("ROLE_ADMIN","ROLE_BUYER")
+                .antMatchers("/api/products/**").hasAnyAuthority("ROLE_SELLER", "ROLE_BUYER")
+                .antMatchers("/api/order-status/**").hasAuthority("ROLE_SELLER")
+                .antMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/api/orders/**").hasAnyAuthority("ROLE_BUYER", "ROLE_BUYER")
+                .antMatchers("/**/admin").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
