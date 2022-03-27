@@ -10,10 +10,6 @@ insert into USER_ROLES(USER_ID, ROLE_ID) values (111, 1);
 insert into USER_ROLES(USER_ID, ROLE_ID) values (112, 2);
 insert into USER_ROLES(USER_ID, ROLE_ID) values (113, 3);
 
-
-
-
-# Products
 insert into product(banner, description, name, price, quantity, sku, user_id)
             values('https://global-uploads.webflow.com/5d556af3fe21d65f602dca94/5d8a50f681e5ab7f71719d2b_77597aba378e1619e666ab94013a046a.png',
                    'Nice Jacket', 'Funcy Jacket', 80, 12, '12345', 111);
